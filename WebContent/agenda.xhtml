@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui" template="/WEB-INF/template.xhtml">
+
+	<ui:define name="titulo">Agenda</ui:define>
+
+	<ui:define name="subtitulo">Agenda</ui:define>
+
+	<ui:define name="conteudo">
+		<h:form>
+			<div class="panel panel-default">
+				<p:growl id="growl" autoUpdate="true" globalOnly="false" />
+				<div class="panel-body">
+
+					<p:schedule id="schedule" value="#{atendimentoMB.eventModel}"
+						widgetVar="schedule" locale="pt" axisFormat="HH:mm"
+						timeFormat="HH:mm" timeZone="GMT+2">
+
+						<p:ajax event="dateSelect" listener="#{atendimentoMB.quandoNovo}"
+							update="eventDetails" oncomplete="PF('eventDialog').show();" />
+						<p:ajax event="eventSelect"
+							listener="#{atendimentoMB.quandoSelecionado}" update="eventDetails"
+							oncomplete="PF('eventDialog').show();" />
+						<p:ajax event="eventMove" listener="#{atendimentoMB.quandoMovido}"
+							update="growl" />
+						<p:ajax event="eventResize"
+							listener="#{atendimentoMB.quandoRedimensionado}" update="growl" />
+
+					</p:schedule>
+
+
+					<p:dialog widgetVar="eventDialog" header="Novo agendamento"
+						showEffect="clip" hideEffect="clip">
+						<h:panelGrid id="eventDetails" columns="2">
+
+
+							<p:outputLabel for="datainicio" value="Hora início:" />
+							<p:calendar id="datainicio"
+								value="#{atendimentoMB.atendimento.dataInicio}"
+								pattern="dd/MM/yyyy HH:mm">
+								<f:convertDateTime pattern="dd/MM/yyyy HH:mm" timeZone="GMT+2" />
+							</p:calendar>
+
+							<p:outputLabel for="datafim" value="Hora fim:" />
+							<p:calendar id="datafim"
+								value="#{atendimentoMB.atendimento.dataFim}"
+								pattern="dd/MM/yyyy HH:mm">
+								<f:convertDateTime pattern="dd/MM/yyyy HH:mm" timeZone="GMT+2" />
+							</p:calendar>
+
+							<p:outputLabel for="tipoAtendimento" value="Tipo de Atendimento:" />
+							<p:selectOneMenu id="tipoAtendimento" converter="entityConverter"
+								value="#{atendimentoMB.atendimento.tipo}">
+								<f:selectItems value="#{aplicacaoMB.tipoAtendimentos}" var="_t"
+									itemLabel="#{_t.descricao}" itemValue="#{_t}" />
+							</p:selectOneMenu>
+
+
+							<p:outputLabel for="profissional" value="Profissional:" />
+							<p:autoComplete id="profissional"
+								value="#{atendimentoMB.atendimento.profissional}"
+								completeMethod="#{profissionalMB.pesquisar}" var="pro"
+								itemLabel="#{pro.nome}" itemValue="#{pro}" required="false"
+								converter="entityConverter" forceSelection="true" />
+
+							<p:outputLabel for="paciente" value="Paciente:" />
+							<p:autoComplete id="paciente"
+								value="#{atendimentoMB.atendimento.paciente}"
+								completeMethod="#{pacienteMB.pesquisar}" var="p"
+								itemLabel="#{p.nome}" itemValue="#{p}" required="false"
+								converter="entityConverter" forceSelection="true" />
+								
+							<p:outputLabel for="descricao" value="Descrição" />
+							<p:inputText id="descricao" value="#{atendimentoMB.atendimento.descricao}" />
+
+
+
+							<p:commandButton type="reset" value="Reset" />
+							<p:commandButton id="addButton" value="Save"
+								actionListener="#{atendimentoMB.salvar()}"
+								oncomplete="PF('myschedule').update();PF('eventDialog').hide();" />
+						</h:panelGrid>
+					</p:dialog>
+
+				</div>
+			</div>
+
+
+		</h:form>
+	</ui:define>
+</ui:composition>
