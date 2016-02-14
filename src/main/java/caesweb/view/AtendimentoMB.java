@@ -53,7 +53,7 @@ public class AtendimentoMB {
 			eventModel.addEvent(evento);
 		}
 		}catch(NullPointerException npe){
-			
+			npe.printStackTrace();
 		}
 	}
 	
@@ -64,6 +64,7 @@ public class AtendimentoMB {
 		
 		atendimento.setDataInicio(event.getStartDate());
 		atendimento.setDataFim(event.getEndDate());
+		
 	}
 	
 	public void quandoSelecionado(SelectEvent selectEvent){
@@ -105,6 +106,7 @@ public class AtendimentoMB {
 	public void salvar() {
 		business.salvar(atendimento);
 		atendimento = new Atendimento();
+		init();
 		JsfUtil.showInfoMessage("Atendimento salvo!");
 	}
 

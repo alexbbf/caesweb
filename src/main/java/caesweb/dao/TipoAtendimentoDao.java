@@ -18,6 +18,10 @@ public class TipoAtendimentoDao {
 		return em.createQuery("select t from TipoAtendimento t", TipoAtendimento.class).getResultList();
 	}
 	
+	public TipoAtendimento salvar(TipoAtendimento tipoAtendimento){
+		return em.merge(tipoAtendimento);
+	}
+	
 	
 
 }

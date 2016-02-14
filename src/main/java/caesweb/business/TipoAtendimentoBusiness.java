@@ -28,6 +28,12 @@ public class TipoAtendimentoBusiness {
 	public List<TipoAtendimento> listar() {
 		return dao.listar();
 	}
+
+	public TipoAtendimento salvar(TipoAtendimento tipoAtendimento) {
+		return dao.salvar(tipoAtendimento);
+	}
+	
+	
 	
 	
 

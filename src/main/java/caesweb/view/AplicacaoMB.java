@@ -8,6 +8,7 @@ import javax.faces.bean.SessionScoped;
 
 import caesweb.business.TipoAtendimentoBusiness;
 import caesweb.model.TipoAtendimento;
+import caesweb.util.JsfUtil;
 
 @ManagedBean
 @SessionScoped
@@ -16,11 +17,32 @@ public class AplicacaoMB {
 	@EJB
 	private TipoAtendimentoBusiness tipoAtendimentoBusiness;
 	
-
+	TipoAtendimento tipoAtendimento = new TipoAtendimento();
 
 	public List<TipoAtendimento> getTipoAtendimentos() {
 		return tipoAtendimentoBusiness.listar();
 	}
+
+
+	public void salvar() {
+		tipoAtendimentoBusiness.salvar(tipoAtendimento);
+		JsfUtil.showInfoMessage("Dados salvos");
+		tipoAtendimento = new TipoAtendimento();
+	}
+
+
+	public TipoAtendimento getTipoAtendimento() {
+		return tipoAtendimento;
+	}
+
+
+	public void setTipoAtendimento(TipoAtendimento tipoAtendimento) {
+		this.tipoAtendimento = tipoAtendimento;
+	}
+	
+	
+	
+	
 
 	
 	
