@@ -22,7 +22,7 @@ public class PacienteDao {
 	
 	public List<Paciente> pesquisar(String s) {
 		return em.createQuery(
-				"SELECT p FROM Paciente p WHERE UPPER(p.nome) LIKE UPPER('"
+				"SELECT p FROM Paciente p WHERE p.ativo = true and UPPER(p.nome) LIKE UPPER('"
 						+ s + "%')", Paciente.class).getResultList();
 	}
 	

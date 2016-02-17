@@ -20,21 +20,45 @@ public class ProfissionalMB {
 
 	private Profissional profissional = new Profissional();
 
+	private String nome;
+
 	private List<Profissional> profissionais = new ArrayList<Profissional>();
 
-	
 	public void salvar() {
+		profissional.setAtivo(true);
 		business.salvar(profissional);
 		JsfUtil.showInfoMessage("Dados salvos");
 		profissional = new Profissional();
 	}
+	
+	public void excluir(){
+		profissional.setAtivo(false);
+		business.salvar(profissional);
+		JsfUtil.showInfoMessage("Excluido");
+	}
 
 	public List<Profissional> pesquisar(String s) {
-		return  business.pesquisar(s);
+		return business.pesquisar(s);
 	}
-	
+
+	public void buscar() {
+		if (nome.length() > 2) {
+			profissionais = business.pesquisar(nome);
+		} else {
+			profissionais = new ArrayList<Profissional>();
+		}
+	}
+
 	public Profissional getProfissional() {
 		return profissional;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
 	public void setProfissional(Profissional profissional) {
@@ -48,6 +72,5 @@ public class ProfissionalMB {
 	public void setProfissionais(List<Profissional> profissionais) {
 		this.profissionais = profissionais;
 	}
-
 
 }

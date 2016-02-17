@@ -1,0 +1,146 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui" template="/WEB-INF/template.xhtml">
+
+	<ui:define name="titulo">Profissionais</ui:define>
+
+	<ui:define name="subtitulo">Busca de profissionais</ui:define>
+
+	<ui:define name="conteudo">
+		<h:form>
+			<div class="panel panel-default">
+				<p:growl autoUpdate="true" globalOnly="false" />
+				<div class="panel-heading"></div>
+				<div class="panel-body">
+					<div class="col-lg-6">
+						<div class="form-group">
+							<p:outputLabel for="nomeprofissional"
+								value="Nome do profissional" />
+							<p:inputText id="nomeprofissional" value="#{profissionalMB.nome}"
+								styleClass="form-control">
+								<p:ajax event="keyup" listener="#{profissionalMB.buscar()}"
+									update="profissionais" />
+							</p:inputText>
+						</div>
+						<div class="form-group">
+							<p:dataTable id="profissionais" var="_p" reflow="true"
+								emptyMessage="Nenhum encontrado"
+								value="#{profissionalMB.profissionais}" selectionMode="single"
+								selection="#{profissionalMB.profissional}" rowKey="#{_p.id}">
+								<p:ajax event="rowSelect" update="@form" />
+								<p:column headerText="Nome">
+									<h:outputText value="#{_p.nome}" />
+								</p:column>
+								<p:column headerText="Tel.Celular">
+									<h:outputText value="#{_p.telefoneCelular}" />
+								</p:column>
+								<p:column headerText="Tel. Fixo">
+									<h:outputText value="#{_p.telefoneResidencia}" />
+								</p:column>
+
+							</p:dataTable>
+
+						</div>
+
+					</div>
+					<div class="col-lg-12">
+						<div class="col-lg-6">
+							<div class="form-group">
+								<p:outputLabel for="nome" value="Nome completo" />
+								<p:inputText id="nome"
+									value="#{profissionalMB.profissional.nome}"
+									styleClass="form-control" />
+							</div>
+							<div class="form-group">
+								<p:outputLabel for="registroConselho"
+									value="Registro do Conselho" />
+								<p:inputText id="registroConselho"
+									value="#{profissionalMB.profissional.registroConselho}"
+									styleClass="form-control" />
+							</div>
+							<div class="form-group">
+								<p:outputLabel for="email" value="Email" />
+								<p:inputText id="email"
+									value="#{profissionalMB.profissional.email}"
+									styleClass="form-control" />
+							</div>
+							<div class="form-group">
+								<p:outputLabel for="celular" value="Telefone Celular" />
+								<p:inputMask id="celular"
+									value="#{profissionalMB.profissional.telefoneCelular}"
+									mask="(99)9-9999-9999" styleClass="form-control" />
+							</div>
+							<div class="form-group">
+								<p:outputLabel for="residencial" value="Telefone Residencial" />
+								<p:inputMask id="residencial"
+									value="#{profissionalMB.profissional.telefoneResidencia}"
+									mask="(99)9999-9999" styleClass="form-control" />
+							</div>
+							<div class="form-group">
+								<p:outputLabel for="cpf" value="CPF" />
+								<p:inputMask id="cpf" value="#{profissionalMB.profissional.cpf}"
+									mask="999.999.999-99" styleClass="form-control" />
+							</div>
+						</div>
+						<div class="col-lg-6">
+							<div class="form-group">
+								<p:outputLabel for="cidade" value="Cidade" />
+								<p:inputText id="cidade"
+									value="#{profissionalMB.profissional.cidade}"
+									styleClass="form-control" />
+							</div>
+							<div class="form-group">
+								<p:outputLabel for="log" value="Logradouro" />
+								<p:inputText id="log"
+									value="#{profissionalMB.profissional.logradouro}"
+									styleClass="form-control" />
+							</div>
+							<div class="form-group">
+								<p:outputLabel for="num" value="Número" />
+								<p:inputText id="num"
+									value="#{profissionalMB.profissional.numero}"
+									styleClass="form-control" />
+							</div>
+							<div class="form-group">
+								<p:outputLabel for="bairro" value="Bairro" />
+								<p:inputText id="bairro"
+									value="#{profissionalMB.profissional.bairro}"
+									styleClass="form-control" />
+							</div>
+							<div class="form-group">
+								<p:outputLabel for="complemento" value="Complemento" />
+								<p:inputText id="complemento"
+									value="#{profissionalMB.profissional.complemento}"
+									styleClass="form-control" />
+							</div>
+							<div class="form-group">
+								<p:outputLabel for="especialidade" value="Especialidade" />
+								<p:inputText id="especialidade"
+									value="#{profissionalMB.profissional.especialidade}"
+									styleClass="form-control" />
+							</div>
+
+							<div class="form-group">
+								<p:outputLabel for="tipoProfissional"
+									value="Tipo de profissional" />
+								<h:selectOneMenu id="tipoProfissional" styleClass="form-control"
+									converter="entityConverter"
+									value="#{profissionalMB.profissional.tipoProfissional}">
+									<f:selectItems value="#{tipoProfissionalMB.tipos}" var="_t"
+										itemLabel="#{_t.descricao}" itemValue="#{_t}" />
+								</h:selectOneMenu>
+							</div>
+
+						
+
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</h:form>
+	</ui:define>
+</ui:composition>

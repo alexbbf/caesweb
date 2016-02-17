@@ -20,7 +20,7 @@ public class ProfissionalDao {
 	
 	public List<Profissional> pesquisar(String s) {
 		return em.createQuery(
-				"SELECT p FROM Profissional p WHERE UPPER(p.nome) LIKE UPPER('"
+				"SELECT p FROM Profissional p WHERE p.ativo = true and UPPER(p.nome) LIKE UPPER('"
 						+ s + "%')", Profissional.class).getResultList();
 	}
 	

@@ -19,10 +19,10 @@ public class PacienteMB {
 	private PacienteBusiness business;
 
 	private Paciente paciente;
-	
+
 	private String nome;
-	
-	private List<Paciente> pacientes = new  ArrayList<Paciente>();
+
+	private List<Paciente> pacientes = new ArrayList<Paciente>();
 
 	public Paciente getPaciente() {
 		return paciente;
@@ -31,8 +31,6 @@ public class PacienteMB {
 	public void setPaciente(Paciente paciente) {
 		this.paciente = paciente;
 	}
-	
-	
 
 	public String getNome() {
 		return nome;
@@ -43,17 +41,23 @@ public class PacienteMB {
 	}
 
 	public void salvar() {
-		 business.salvar(paciente);
-		 JsfUtil.showInfoMessage("Dados salvos");
-		 paciente = new Paciente();
+		paciente.setAtivo(true);
+		business.salvar(paciente);
+		JsfUtil.showInfoMessage("Dados salvos");
+		paciente = new Paciente();
 	}
 
 	public List<Paciente> pesquisar(String s) {
 		return business.pesquisar(s);
 	}
-	
+
 	public void buscar() {
-		 pacientes = business.pesquisar(nome);
+		if (nome.length() > 2) {
+			pacientes = business.pesquisar(nome);
+		} else {
+			pacientes = new ArrayList<Paciente>();
+		}
+
 	}
 
 	public List<Paciente> getPacientes() {
@@ -63,11 +67,5 @@ public class PacienteMB {
 	public void setPacientes(List<Paciente> pacientes) {
 		this.pacientes = pacientes;
 	}
-	
-	
-	
-	
-	
-	
 
 }
