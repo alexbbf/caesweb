@@ -1,0 +1,127 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui" template="/WEB-INF/template.xhtml">
+
+	<ui:define name="titulo">Pacientes</ui:define>
+
+	<ui:define name="subtitulo">Busca de Pacientes</ui:define>
+
+	<ui:define name="conteudo">
+		<h:form>
+			<div class="panel panel-default">
+				<p:growl autoUpdate="true" globalOnly="false" />
+				<div class="panel-heading"></div>
+				<div class="panel-body">
+					<div class="col-lg-6">
+						<div class="form-group">
+							<p:outputLabel for="nomepaciente" value="Nome do paciente" />
+							<p:inputText id="nomepaciente" value="#{pacienteMB.nome}"
+								styleClass="form-control">
+								<p:ajax event="keyup" listener="#{pacienteMB.buscar()}"
+									update="pacientes" />
+							</p:inputText>
+						</div>
+						<div class="form-group">
+							<p:dataTable id="pacientes" var="_p" reflow="true"
+								emptyMessage="Nenhum encontrado" value="#{pacienteMB.pacientes}"
+								selectionMode="single" selection="#{pacienteMB.paciente}"
+								rowKey="#{_p.id}">
+								<p:ajax event="rowSelect" update="@form" />
+								<p:column headerText="Nome">
+									<h:outputText value="#{_p.nome}" />
+								</p:column>
+								<p:column headerText="Tel.Celular">
+									<h:outputText value="#{_p.telefoneCelular}" />
+								</p:column>
+								<p:column headerText="Tel. Fixo">
+									<h:outputText value="#{_p.telefoneResidencia}" />
+								</p:column>
+
+							</p:dataTable>
+
+						</div>
+
+					</div>
+					<div class="col-lg-12">
+						<div class="col-lg-6">
+							<div class="form-group">
+								<p:outputLabel for="nomePaciente" value="Nome completo" />
+								<p:inputText id="nomePaciente"
+									value="#{pacienteMB.paciente.nome}" styleClass="form-control" />
+							</div>
+							<div class="form-group">
+								<p:outputLabel for="matriculaPaciente" value="Matrícula" />
+								<p:inputText id="matriculaPaciente"
+									value="#{pacienteMB.paciente.matricula}"
+									styleClass="form-control" />
+							</div>
+							<div class="form-group">
+								<p:outputLabel for="emailPaciente" value="Email" />
+								<p:inputText id="emailPaciente"
+									value="#{pacienteMB.paciente.email}" styleClass="form-control" />
+							</div>
+							<div class="form-group">
+								<p:outputLabel for="celularPaciente" value="Telefone Celular" />
+								<p:inputMask id="celularPaciente"
+									value="#{pacienteMB.paciente.telefoneCelular}"
+									mask="(99)9-9999-9999" styleClass="form-control" />
+							</div>
+							<div class="form-group">
+								<p:outputLabel for="residencialPaciente"
+									value="Telefone Residencial" />
+								<p:inputMask id="residencialPaciente"
+									value="#{pacienteMB.paciente.telefoneResidencia}"
+									mask="(99)9999-9999" styleClass="form-control" />
+							</div>
+							<div class="form-group">
+								<p:outputLabel for="cpfPaciente" value="CPF" />
+								<p:inputMask id="cpfPaciente" value="#{pacienteMB.paciente.cpf}"
+									mask="999.999.999-99" styleClass="form-control" />
+							</div>
+						</div>
+						<div class="col-lg-6">
+							<div class="form-group">
+								<p:outputLabel for="cidade" value="Cidade" />
+								<p:inputText id="cidade" value="#{pacienteMB.paciente.cidade}"
+									styleClass="form-control" />
+							</div>
+							<div class="form-group">
+								<p:outputLabel for="logPaciente" value="Logradouro" />
+								<p:inputText id="logPaciente"
+									value="#{pacienteMB.paciente.logradouro}"
+									styleClass="form-control" />
+							</div>
+							<div class="form-group">
+								<p:outputLabel for="numPaciente" value="Número" />
+								<p:inputText id="numPaciente"
+									value="#{pacienteMB.paciente.numero}" styleClass="form-control" />
+							</div>
+							<div class="form-group">
+								<p:outputLabel for="bairroPaciente" value="Bairro" />
+								<p:inputText id="bairroPaciente"
+									value="#{pacienteMB.paciente.bairro}" styleClass="form-control" />
+							</div>
+							<div class="form-group">
+								<p:outputLabel for="complementoPaciente" value="Complemento" />
+								<p:inputText id="complementoPaciente"
+									value="#{pacienteMB.paciente.complemento}"
+									styleClass="form-control" />
+							</div>
+							<div class="form-group">
+								<p:outputLabel for="obsPaciente" value="Observações" />
+								<p:inputTextarea id="obsPaciente"
+									value="#{pacienteMB.paciente.observacoes}"
+									styleClass="form-control" />
+							</div>
+
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</h:form>
+	</ui:define>
+</ui:composition>
