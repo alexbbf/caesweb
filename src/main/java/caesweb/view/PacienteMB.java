@@ -46,6 +46,14 @@ public class PacienteMB {
 		JsfUtil.showInfoMessage("Dados salvos");
 		paciente = new Paciente();
 	}
+	
+	public void excluir() {
+		paciente.setAtivo(false);
+		business.salvar(paciente);
+		JsfUtil.showInfoMessage("Excluido");
+		paciente = new Paciente();
+	}
+
 
 	public List<Paciente> pesquisar(String s) {
 		return business.pesquisar(s);

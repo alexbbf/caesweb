@@ -124,6 +124,19 @@
 						<p:commandButton id="salvarPaciente" value="SALVAR"
 							action="#{pacienteMB.salvar()}" styleClass="btn btn-default"
 							validateClient="true" ajax="false" update="@form" />
+
+						<p:commandButton value="EXCLUIR" styleClass="btn btn-default"
+							actionListener="#{profissionalMB.excluir()}" immediate="true">
+							<p:confirm header="Confirmação" message="Tem certeza?"
+								icon="ui-icon-alert" />
+						</p:commandButton>
+
+						<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+							<p:commandButton value="SIM" type="button" immediate="true"
+								styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+							<p:commandButton value="NÃO" type="button"
+								styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+						</p:confirmDialog>
 					</div>
 				</div>
 			</div>

@@ -7,6 +7,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
 import caesweb.business.TipoAtendimentoBusiness;
+import caesweb.model.Grupo;
 import caesweb.model.TipoAtendimento;
 import caesweb.util.JsfUtil;
 
@@ -18,6 +19,8 @@ public class AplicacaoMB {
 	private TipoAtendimentoBusiness tipoAtendimentoBusiness;
 	
 	TipoAtendimento tipoAtendimento = new TipoAtendimento();
+	
+	private Grupo[] grupos = Grupo.values();
 
 	public List<TipoAtendimento> getTipoAtendimentos() {
 		return tipoAtendimentoBusiness.listar();
@@ -33,6 +36,16 @@ public class AplicacaoMB {
 
 	public TipoAtendimento getTipoAtendimento() {
 		return tipoAtendimento;
+	}
+
+
+	public Grupo[] getGrupos() {
+		return grupos;
+	}
+
+
+	public void setGrupos(Grupo[] grupos) {
+		this.grupos = grupos;
 	}
 
 

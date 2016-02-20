@@ -27,6 +27,7 @@ public class PacienteBusiness {
 	}
 
 	public Paciente salvar(Paciente p) {
+		
 		return dao.salvar(p);
 	}
 

@@ -1,12 +1,18 @@
 package caesweb.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 @DiscriminatorValue("profissional")
-public class Profissional extends Pessoa{
+public class Profissional extends Pessoa {
 
 	private String registroConselho;
 
@@ -15,12 +21,35 @@ public class Profissional extends Pessoa{
 	private String senha;
 
 	private String usuario;
-	
+
+	@OneToMany(mappedBy = "profissional", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	private List<Permissao> permissoes;
+
 	@ManyToOne
 	private TipoProfissional tipoProfissional;
+	
+	public void adicionaPermissao(Permissao p){
+		if(permissoes == null){
+			permissoes = new ArrayList<Permissao>();
+		}
+		p.setProfissional(this);
+		permissoes.add(p);
+	}
+	
+	public void removerPermissao(Permissao p){
+		permissoes.remove(p);
+	}
 
 	public String getRegistroConselho() {
 		return registroConselho;
+	}
+
+	public List<Permissao> getPermissoes() {
+		return permissoes;
+	}
+
+	public void setPermissoes(List<Permissao> permissoes) {
+		this.permissoes = permissoes;
 	}
 
 	public void setRegistroConselho(String registroConselho) {
@@ -112,7 +141,5 @@ public class Profissional extends Pessoa{
 			return false;
 		return true;
 	}
-	
-	
 
 }

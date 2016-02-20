@@ -8,6 +8,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
 import caesweb.business.ProfissionalBusiness;
+import caesweb.model.Permissao;
 import caesweb.model.Profissional;
 import caesweb.util.JsfUtil;
 
@@ -21,6 +22,10 @@ public class ProfissionalMB {
 	private Profissional profissional = new Profissional();
 
 	private String nome;
+	
+	private Permissao permissaoSelecionada;
+	
+	private Permissao permissao;
 
 	private List<Profissional> profissionais = new ArrayList<Profissional>();
 
@@ -48,6 +53,23 @@ public class ProfissionalMB {
 			profissionais = new ArrayList<Profissional>();
 		}
 	}
+	
+	public void removerPermissao(){
+		profissional.removerPermissao(permissaoSelecionada);
+	}
+	
+	public void adicionarPermissao(){
+		profissional.adicionaPermissao(permissao);
+		permissao = new Permissao();
+	}
+
+	public Permissao getPermissaoSelecionada() {
+		return permissaoSelecionada;
+	}
+
+	public void setPermissaoSelecionada(Permissao permissaoSelecionada) {
+		this.permissaoSelecionada = permissaoSelecionada;
+	}
 
 	public Profissional getProfissional() {
 		return profissional;
@@ -73,4 +95,13 @@ public class ProfissionalMB {
 		this.profissionais = profissionais;
 	}
 
+	public Permissao getPermissao() {
+		return permissao;
+	}
+
+	public void setPermissao(Permissao permissao) {
+		this.permissao = permissao;
+	}
+	
+	
 }

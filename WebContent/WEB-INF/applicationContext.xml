@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans:beans xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.springframework.org/schema/security"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/security     http://www.springframework.org/schema/security/spring-security.xsd
+							     http://www.springframework.org/schema/beans 		http://www.springframework.org/schema/beans/spring-beans.xsd
+							     http://www.springframework.org/schema/context 		http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<context:annotation-config />
+	<beans:bean id="appUserDetailService" class="caesweb.security.AppUserDetailService"></beans:bean>
+	<http pattern="/login.html" security="none" />
+	<http pattern="/javax.faces.resource/**" security="none" />
+	<http auto-config="false" use-expressions="true">
+		<form-login login-page="/login.html"
+			authentication-failure-url="/login.html?invalid=true"
+			default-target-url="/index.xhtml" always-use-default-target="true" />
+		<logout logout-success-url="/login.html" invalidate-session="true" />
+		<intercept-url pattern="/admin/**" access="hasAnyRole('ROLE_ADMIN')"></intercept-url>
+		<intercept-url pattern="/busca/**"
+			access="hasAnyRole('ROLE_AUXILIAR,ROLE_PROFISSIONAL,ROLE_ADMIN')"></intercept-url>
+		<intercept-url pattern="/agendamento/**"
+			access="hasAnyRole('ROLE_AUXILIAR,ROLE_PROFISSIONAL,ROLE_ADMIN')"></intercept-url>
+		<intercept-url pattern="/cadastro/**"
+			access="hasAnyRole('ROLE_AUXILIAR,ROLE_ADMIN')"></intercept-url>
+		<intercept-url pattern="/editar/**"
+			access="hasAnyRole('ROLE_AUXILIAR,ROLE_ADMIN')"></intercept-url>
+
+
+	</http>
+
+	<authentication-manager>
+		<authentication-provider user-service-ref="appUserDetailService">
+			<password-encoder hash="md5" />
+		</authentication-provider>
+	</authentication-manager>
+
+
+</beans:beans> 

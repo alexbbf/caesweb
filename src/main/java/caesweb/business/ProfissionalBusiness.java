@@ -10,6 +10,7 @@ import javax.persistence.PersistenceContext;
 
 import caesweb.dao.ProfissionalDao;
 import caesweb.model.Profissional;
+import caesweb.util.FrameWork;
 
 @LocalBean
 @Stateless
@@ -26,12 +27,20 @@ public class ProfissionalBusiness {
 	}
 
 	public Profissional salvar(Profissional p) {
+		p.setUsuario(p.getCpf().replaceAll(".", "").replaceAll("-", "").trim());
+		p.setSenha(FrameWork.criptografar(p.getSenha()));
 		return dao.salvar(p);
 	}
 
 	public List<Profissional> pesquisar(String s) {
 		return dao.pesquisar(s);
 	}
+
+	public Profissional logar(String usuario) {
+		return dao.logar(usuario);
+	}
+	
+	
 	
 	
 	

@@ -161,16 +161,16 @@
 							action="#{profissionalMB.salvar()}" styleClass="btn btn-default"
 							validateClient="true" ajax="false" />
 
-						<p:commandButton value="Excluir" styleClass="btn btn-default"
+						<p:commandButton value="EXCLUIR" styleClass="btn btn-default"
 							actionListener="#{profissionalMB.excluir()}" immediate="true">
 							<p:confirm header="Confirmação" message="Tem certeza?"
 								icon="ui-icon-alert" />
 						</p:commandButton>
 
 						<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
-							<p:commandButton value="Yes" type="button" immediate="true"
+							<p:commandButton value="SIM" type="button" immediate="true"
 								styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
-							<p:commandButton value="No" type="button" 
+							<p:commandButton value="NÃO" type="button" 
 								styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
 						</p:confirmDialog>
 					</div>
