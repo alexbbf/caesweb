@@ -2,6 +2,7 @@ package caesweb.model;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 
 @Entity
 @DiscriminatorValue("paciente")
@@ -10,6 +11,9 @@ public class Paciente extends Pessoa {
 	private String matricula;
 
 	private String observacoes;
+	
+	@ManyToOne
+	private TipoPaciente tipoPaciente;
 
 	public String getMatricula() {
 		return matricula;
@@ -25,6 +29,16 @@ public class Paciente extends Pessoa {
 
 	public void setObservacoes(String observacoes) {
 		this.observacoes = observacoes;
+	}
+	
+	
+
+	public TipoPaciente getTipoPaciente() {
+		return tipoPaciente;
+	}
+
+	public void setTipoPaciente(TipoPaciente tipoPaciente) {
+		this.tipoPaciente = tipoPaciente;
 	}
 
 	@Override
