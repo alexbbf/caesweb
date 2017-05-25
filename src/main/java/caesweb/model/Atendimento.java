@@ -31,10 +31,23 @@ public class Atendimento {
 
 	@ManyToOne
 	private Paciente paciente;
+	
+	@ManyToOne
+	private LocalAtendimento localAtendimento;
 
 	private String descricao;
 
 	private boolean realizado;
+
+	private boolean extra;
+
+	public boolean isExtra() {
+		return extra;
+	}
+
+	public void setExtra(boolean extra) {
+		this.extra = extra;
+	}
 
 	public Long getId() {
 		return id;

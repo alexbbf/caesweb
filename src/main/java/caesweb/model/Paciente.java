@@ -30,8 +30,6 @@ public class Paciente extends Pessoa {
 	public void setObservacoes(String observacoes) {
 		this.observacoes = observacoes;
 	}
-	
-	
 
 	public TipoPaciente getTipoPaciente() {
 		return tipoPaciente;
